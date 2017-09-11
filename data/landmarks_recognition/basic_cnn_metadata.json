@@ -1,0 +1,82 @@
+[
+  {
+    "length": 864,
+    "weight_name": "conv2d_1/kernel:0",
+    "layer_name": "conv2d_1",
+    "offset": 0,
+    "shape": [3, 3, 3, 32],
+    "type": "float32"
+  },
+  {
+    "length": 32,
+    "weight_name": "conv2d_1/bias:0",
+    "layer_name": "conv2d_1",
+    "offset": 3456,
+    "shape": [32],
+    "type": "float32"
+  },
+  {
+    "length": 9216,
+    "weight_name": "conv2d_2/kernel:0",
+    "layer_name": "conv2d_2",
+    "offset": 3584,
+    "shape": [3, 3, 32, 32],
+    "type": "float32"
+  },
+  {
+    "length": 32,
+    "weight_name": "conv2d_2/bias:0",
+    "layer_name": "conv2d_2",
+    "offset": 40448,
+    "shape": [32],
+    "type": "float32"
+  },
+  {
+    "length": 18432,
+    "weight_name": "conv2d_3/kernel:0",
+    "layer_name": "conv2d_3",
+    "offset": 40576,
+    "shape": [3, 3, 32, 64],
+    "type": "float32"
+  },
+  {
+    "length": 64,
+    "weight_name": "conv2d_3/bias:0",
+    "layer_name": "conv2d_3",
+    "offset": 114304,
+    "shape": [64],
+    "type": "float32"
+  },
+  {
+    "length": 22151168,
+    "weight_name": "dense_1/kernel:0",
+    "layer_name": "dense_1",
+    "offset": 114560,
+    "shape": [43264, 512],
+    "type": "float32"
+  },
+  {
+    "length": 512,
+    "weight_name": "dense_1/bias:0",
+    "layer_name": "dense_1",
+    "offset": 88719232,
+    "shape": [512],
+    "type": "float32"
+  },
+  {
+    "length": 12800,
+    "weight_name": "dense_2/kernel:0",
+    "layer_name": "dense_2",
+    "offset": 88721280,
+    "shape": [512, 25],
+    "type": "float32"
+  },
+  {
+    "length": 25,
+    "weight_name": "dense_2/bias:0",
+    "layer_name": "dense_2",
+    "offset": 88772480,
+    "shape": [25],
+    "type": "float32"
+  }
+]
