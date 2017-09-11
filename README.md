@@ -1,21 +1,55 @@
-# landmarks-webapp
+<div align="center">
+  <p>
+    <a href="">
+      <img alt="First release" src="https://img.shields.io/badge/release-v1.0-brightgreen.svg" />
+    </a>
+    <a href="https://www.npmjs.com/package/npm">
+      <img alt="NPM version" src="https://img.shields.io/npm/v/npm.svg" />
+    </a>
+  </p>
 
-> Landmarks recognition web application
+  <p>
+    ✨<strong>Landmarks Recognition</strong> is a tool that recognizes 25 landmarks from images. ✨
+  </p>
 
-## Build Setup
+  <p>🏛 <i>Arc de Triomphe</i>, <i>Big Ben</i>, <i>Casa Loma</i>, <i>Castel Santangelo</i>, <i>Charlottenburg Palace</i>, <i>Colosseum</i>, <i>Dresden Frauenkirche</i>, <i>Eiffel Tower</i>, <i>Independence Hall</i>, <i>Leaning Tower of Pisa</i>, <i>Milan Cathedral</i>, <i>Notre Dame Cathedral</i>, <i>Pantheon</i>, <i>Reichstag</i>, <i>Sacre Coeur Basilica</i>, <i>Savior on Blood Church</i>, <i>St Basil Cathedral</i>, <i>St Louis Cathedral</i>, <i>St Paul Cathedral</i>, <i>Statue of Liberty</i>, <i>Stephansdom</i>, <i>Taj Mahal</i>, <i>Trevi Foutain</i>, <i>Tyn Church</i> and <i>Westminster Abbey</i> 🏛</p>
+
+  <p>
+    <a href="https://landmarks-recognition.herokuapp.com" class="btn btn-primary btn-md">
+      Launch App
+    </a>
+  </p>
+</div>
+
+## Features
+* 🔩 <strong>Simple: </strong>Bootstrapped with [vue-cli](https://github.com/vuejs/vue-cli)
+
+* 💯 <strong>State of the art: </strong> Prediction using [Keras.js](https://github.com/transcranial/keras-js) and training with images from [Landmark3D](http://landmark3d.codeplex.com)
+
+* 💪 <strong>Powerful: </strong> Runs a [Service Worker](https://github.com/w3c/ServiceWorker) script to increase online performance and function without a network connection
+
+* 📱 <strong>Responsive: </strong> Made mobile responsive with [Bulma](http://bulma.io/) and [SASS](http://sass-lang.com/)
+
+* 🎉 <strong>Live: </strong> Deployed and secured with [Netlify](https://www.netlify.com).
+
+More insight on the classifier training in [this repository](https://github.com/vfaramond/landmarks-recognition).
+
+## Local development
 
 ``` bash
-# install dependencies
-npm install
+# Install dependencies
+$ npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+# Serve with hot reload at localhost:8080
+$ npm run dev
 
-# build for production with minification
-npm run build
+# Build for production with minification
+$ npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# Build for production and view the bundle analyzer report
+$ npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+<p>
+  Head over to <a href="https://github.com/vuejs/vue-cli">vue-cli</a> to see a list of things you can do.
+</p>
