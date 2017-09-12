@@ -90,6 +90,17 @@ const MODEL_FILEPATHS = {
 };
 
 export default {
+  created() {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+    if (gl && gl instanceof WebGLRenderingContext) {
+      this.hasWebgl = true;
+    } else {
+      this.hasWebgl = false;
+    }
+  },
+
   data() {
     return {
       classes,
@@ -99,6 +110,7 @@ export default {
       isModalActive: false,
       model: new Model({
         filepaths: MODEL_FILEPATHS,
+        gpu: this.hasWebgl,
       }),
       modelLoading: true,
       modelRunning: false,

@@ -253,6 +253,16 @@ var MODEL_FILEPATHS = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+  created: function created() {
+    var canvas = document.createElement('canvas');
+    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+    if (gl && gl instanceof WebGLRenderingContext) {
+      this.hasWebgl = true;
+    } else {
+      this.hasWebgl = false;
+    }
+  },
   data: function data() {
     return {
       classes: __WEBPACK_IMPORTED_MODULE_6__classes__["a" /* default */],
@@ -261,7 +271,8 @@ var MODEL_FILEPATHS = {
       imageLoadingError: false,
       isModalActive: false,
       model: new __WEBPACK_IMPORTED_MODULE_0_keras_js__["Model"]({
-        filepaths: MODEL_FILEPATHS
+        filepaths: MODEL_FILEPATHS,
+        gpu: this.hasWebgl
       }),
       modelLoading: true,
       modelRunning: false,
@@ -631,4 +642,4 @@ module.exports = "data:application/octet-stream;base64,Ly8gMkQgTWF4IFBvb2xpbmcgb
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.239d82936361ec26ee85.js.map
+//# sourceMappingURL=app.6be8b747ac282c2ef382.js.map
