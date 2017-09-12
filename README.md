@@ -12,7 +12,7 @@
   </p>
 
   <p>
-    ✨<strong>Landmarks Recognition</strong> is a tool that recognizes 25 landmarks from images. ✨
+    ✨<strong>LandmarksVue</strong> is a tool that recognizes 25 landmarks from image uploads. ✨
   </p>
 
   <p>🏛 <i>Arc de Triomphe</i>, <i>Big Ben</i>, <i>Casa Loma</i>, <i>Castel Santangelo</i>, <i>Charlottenburg Palace</i>, <i>Colosseum</i>, <i>Dresden Frauenkirche</i>, <i>Eiffel Tower</i>, <i>Independence Hall</i>, <i>Leaning Tower of Pisa</i>, <i>Milan Cathedral</i>, <i>Notre Dame Cathedral</i>, <i>Pantheon</i>, <i>Reichstag</i>, <i>Sacre Coeur Basilica</i>, <i>Savior on Blood Church</i>, <i>St Basil Cathedral</i>, <i>St Louis Cathedral</i>, <i>St Paul Cathedral</i>, <i>Statue of Liberty</i>, <i>Stephansdom</i>, <i>Taj Mahal</i>, <i>Trevi Foutain</i>, <i>Tyn Church</i> and <i>Westminster Abbey</i> 🏛</p>
@@ -31,9 +31,9 @@
 
 * 💪 <strong>Powerful: </strong> Runs a [Service Worker](https://github.com/w3c/ServiceWorker) script to increase online performance and function without a network connection
 
-* 📱 <strong>Responsive: </strong> Made mobile responsive with [Bulma](http://bulma.io/) and [SASS](http://sass-lang.com/)
+* 📱 <strong>Responsive: </strong> Made mobile responsive with [Buefy](https://buefy.github.io) and [SASS](http://sass-lang.com/)
 
-* 🎉 <strong>Live: </strong> Deployed and secured with [Netlify](https://www.netlify.com).
+* 🎉 <strong>Live: </strong> Deployed and secured with [GitHub Pages](https://pages.github.com/)
 
 More insight on the classifier training in [this repository](https://github.com/vfaramond/landmarks-recognition).
 

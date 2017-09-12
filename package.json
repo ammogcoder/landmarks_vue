@@ -1,9 +1,9 @@
 {
-  "name": "landmarks-webapp",
+  "name": "landmarks_vue",
   "version": "1.0.0",
-  "description": "Landmarks recognition web application",
+  "description":
+    "Landmarks recognition web application built with Vue.js and Keras.js.",
   "author": "Victor Faramond <victor.faramond@gmail.com>",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
@@ -73,9 +73,5 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }

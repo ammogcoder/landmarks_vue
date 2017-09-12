@@ -47,7 +47,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     staticClass: "modal-card"
   }, [_c('section', {
     staticClass: "modal-card-body has-text-centered"
-  }, [_c('b', [_vm._v("Landmarks Recognition")]), _vm._v(" is a little project using\n        "), _c('a', {
+  }, [_c('b', [_vm._v("LandmarksVue")]), _vm._v(" is a project using\n        "), _c('a', {
     attrs: {
       "href": "https://vuejs.org/",
       "target": "_blank",
@@ -125,7 +125,7 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
     }
   }), _vm._v(" "), _c('p', {
     staticClass: "app-logo-name"
-  }, [_vm._v("Landmarks Recognition")])])])
+  }, [_vm._v("LandmarksVue")])])])
 },function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "card-image"
@@ -631,4 +631,4 @@ module.exports = "data:application/octet-stream;base64,Ly8gMkQgTWF4IFBvb2xpbmcgb
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.f38f5b778390427eef65.js.map
+//# sourceMappingURL=app.239d82936361ec26ee85.js.map

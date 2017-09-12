@@ -5,7 +5,7 @@
         <div class="navbar-brand">
           <a class="navbar-item" href="#">
             <img class="app-logo" src="static/img/icons/icon-128x128.png">
-            <p class="app-logo-name">Landmarks Recognition</p>
+            <p class="app-logo-name">LandmarksVue</p>
           </a>
         </div>
         <div class="navbar-menu">
@@ -21,7 +21,7 @@
     <b-modal :active.sync="isModalActive" canCancel>
       <div class="modal-card">
         <section class="modal-card-body has-text-centered">
-          <b>Landmarks Recognition</b> is a little project using
+          <b>LandmarksVue</b> is a project using
           <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue.js</a>
           and
           <a href="https://github.com/transcranial/keras-js" target="_blank" rel="noopener">Keras.js</a> using a VGG16 convolutional neural network trained on ImageNet and fine-tuned on a landmarks dataset.
