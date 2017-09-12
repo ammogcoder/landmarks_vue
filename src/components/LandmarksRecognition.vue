@@ -90,34 +90,6 @@ const MODEL_FILEPATHS = {
 };
 
 export default {
-  created() {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-
-    if (gl && gl instanceof WebGLRenderingContext) {
-      this.hasWebgl = true;
-    } else {
-      this.hasWebgl = false;
-    }
-  },
-
-  data() {
-    return {
-      classes,
-      dropFiles: [],
-      imageLoading: false,
-      imageLoadingError: false,
-      isModalActive: false,
-      model: new Model({
-        filepaths: MODEL_FILEPATHS,
-        gpu: this.hasWebgl,
-      }),
-      modelLoading: true,
-      modelRunning: false,
-      output: null,
-    };
-  },
-
   asyncComputed: {
     outputClassDescription() {
       if (!this.outputClass) {
@@ -146,6 +118,9 @@ export default {
   },
 
   computed: {
+    loadingProgress() {
+      return this.model.getLoadingProgress();
+    },
     outputClass() {
       if (!this.output) {
         return null;
@@ -161,10 +136,38 @@ export default {
     },
   },
 
-  mounted() {
-    this.model.ready().then(() => {
-      this.modelLoading = false;
-    });
+  created() {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+    if (gl && gl instanceof WebGLRenderingContext) {
+      this.hasWebgl = true;
+    } else {
+      this.hasWebgl = false;
+    }
+
+    this.$Progress.start();
+
+    this.loadingProgressInterval = setInterval(() => {
+      this.$Progress.set(this.loadingProgress);
+    }, 1000);
+  },
+
+  data() {
+    return {
+      classes,
+      dropFiles: [],
+      imageLoading: false,
+      imageLoadingError: false,
+      isModalActive: false,
+      model: new Model({
+        filepaths: MODEL_FILEPATHS,
+        gpu: this.hasWebgl,
+      }),
+      modelLoading: true,
+      modelRunning: false,
+      output: null,
+    };
   },
 
   methods: {
@@ -232,6 +235,20 @@ export default {
         this.output = outputData.dense_2;
         this.modelRunning = false;
       });
+    },
+  },
+
+  mounted() {
+    this.model.ready().then(() => {
+      this.modelLoading = false;
+    });
+  },
+
+  watch: {
+    loadingProgress() {
+      if (this.loadingProgress === 100) {
+        window.clearInterval(this.loadingProgressInterval);
+      }
     },
   },
 };

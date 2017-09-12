@@ -253,34 +253,6 @@ var MODEL_FILEPATHS = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  created: function created() {
-    var canvas = document.createElement('canvas');
-    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-
-    if (gl && gl instanceof WebGLRenderingContext) {
-      this.hasWebgl = true;
-    } else {
-      this.hasWebgl = false;
-    }
-  },
-  data: function data() {
-    return {
-      classes: __WEBPACK_IMPORTED_MODULE_6__classes__["a" /* default */],
-      dropFiles: [],
-      imageLoading: false,
-      imageLoadingError: false,
-      isModalActive: false,
-      model: new __WEBPACK_IMPORTED_MODULE_0_keras_js__["Model"]({
-        filepaths: MODEL_FILEPATHS,
-        gpu: this.hasWebgl
-      }),
-      modelLoading: true,
-      modelRunning: false,
-      output: null
-    };
-  },
-
-
   asyncComputed: {
     outputClassDescription: function outputClassDescription() {
       if (!this.outputClass) {
@@ -308,6 +280,9 @@ var MODEL_FILEPATHS = {
   },
 
   computed: {
+    loadingProgress: function loadingProgress() {
+      return this.model.getLoadingProgress();
+    },
     outputClass: function outputClass() {
       if (!this.output) {
         return null;
@@ -325,12 +300,39 @@ var MODEL_FILEPATHS = {
     }
   },
 
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
-    this.model.ready().then(function () {
-      _this.modelLoading = false;
-    });
+    var canvas = document.createElement('canvas');
+    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+    if (gl && gl instanceof WebGLRenderingContext) {
+      this.hasWebgl = true;
+    } else {
+      this.hasWebgl = false;
+    }
+
+    this.$Progress.start();
+
+    this.loadingProgressInterval = setInterval(function () {
+      _this.$Progress.set(_this.loadingProgress);
+    }, 1000);
+  },
+  data: function data() {
+    return {
+      classes: __WEBPACK_IMPORTED_MODULE_6__classes__["a" /* default */],
+      dropFiles: [],
+      imageLoading: false,
+      imageLoadingError: false,
+      isModalActive: false,
+      model: new __WEBPACK_IMPORTED_MODULE_0_keras_js__["Model"]({
+        filepaths: MODEL_FILEPATHS,
+        gpu: this.hasWebgl
+      }),
+      modelLoading: true,
+      modelRunning: false,
+      output: null
+    };
   },
 
 
@@ -403,6 +405,23 @@ var MODEL_FILEPATHS = {
         _this3.modelRunning = false;
       });
     }
+  },
+
+  mounted: function mounted() {
+    var _this4 = this;
+
+    this.model.ready().then(function () {
+      _this4.modelLoading = false;
+    });
+  },
+
+
+  watch: {
+    loadingProgress: function loadingProgress() {
+      if (this.loadingProgress === 100) {
+        window.clearInterval(this.loadingProgressInterval);
+      }
+    }
   }
 });
 
@@ -417,7 +436,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "app"
     }
-  }, [_c('landmarks-recognition')], 1)
+  }, [_c('landmarks-recognition'), _vm._v(" "), _c('vue-progress-bar')], 1)
 }
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -496,7 +515,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_buefy___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_buefy__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_async_computed__ = __webpack_require__("PlbA");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_async_computed___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_async_computed__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App__ = __webpack_require__("M93x");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_progressbar__ = __webpack_require__("zYko");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_progressbar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_progressbar__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__App__ = __webpack_require__("M93x");
+
 
 
 
@@ -504,6 +526,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_buefy___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_2_vue_async_computed___default.a);
+__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_3_vue_progressbar___default.a, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '2px'
+});
 
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].config.productionTip = false;
 
@@ -511,7 +538,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].config.productionTip = fals
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
   el: '#app',
   template: '<App/>',
-  components: { App: __WEBPACK_IMPORTED_MODULE_3__App__["a" /* default */] }
+  components: { App: __WEBPACK_IMPORTED_MODULE_4__App__["a" /* default */] }
 });
 
 /***/ }),
@@ -615,6 +642,7 @@ var Component = normalizeComponent(
 //
 //
 //
+//
 
 
 
@@ -642,4 +670,4 @@ module.exports = "data:application/octet-stream;base64,Ly8gMkQgTWF4IFBvb2xpbmcgb
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.6be8b747ac282c2ef382.js.map
+//# sourceMappingURL=app.0f79c39eb93d67ed2876.js.map
