@@ -116,13 +116,12 @@ var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _
   }, [_c('a', {
     staticClass: "navbar-item",
     attrs: {
-      "href": "http://bulma.io"
+      "href": "#"
     }
   }, [_c('img', {
     staticClass: "app-logo",
     attrs: {
-      "src": "/static/img/icons/icon-128x128.png",
-      "alt": "Bulma: a modern CSS framework based on Flexbox"
+      "src": "static/img/icons/icon-128x128.png"
     }
   }), _vm._v(" "), _c('p', {
     staticClass: "app-logo-name"
@@ -632,4 +631,4 @@ module.exports = "data:application/octet-stream;base64,Ly8gMkQgTWF4IFBvb2xpbmcgb
 /***/ })
 
 },["NHnr"]);
-//# sourceMappingURL=app.8088a12234fc12d546a9.js.map
+//# sourceMappingURL=app.f38f5b778390427eef65.js.map

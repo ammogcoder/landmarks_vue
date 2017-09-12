@@ -3,8 +3,8 @@
     <header class="container">
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="http://bulma.io">
-            <img class="app-logo" src="/static/img/icons/icon-128x128.png" alt="Bulma: a modern CSS framework based on Flexbox">
+          <a class="navbar-item" href="#">
+            <img class="app-logo" src="static/img/icons/icon-128x128.png">
             <p class="app-logo-name">Landmarks Recognition</p>
           </a>
         </div>
