@@ -79,9 +79,9 @@ import ops from 'ndarray-ops';
 import axios from 'axios';
 import classes from './classes';
 
-const MODEL_FILE = require('../../data/landmarks_recognition/finetuning.json');
-const WEIGHTS_FILE = require('../../data/landmarks_recognition/finetuning_weights.buf');
-const METADATA_FILE = require('../../data/landmarks_recognition/finetuning_metadata.json');
+const MODEL_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks-webapp/d3db8742/data/landmarks_recognition/finetuning.json';
+const WEIGHTS_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks-webapp/d3db8742/data/landmarks_recognition/finetuning_weights.buf';
+const METADATA_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks-webapp/d3db8742/data/landmarks_recognition/finetuning_metadata.json';
 
 const MODEL_FILEPATHS = {
   model: MODEL_FILE,
@@ -99,7 +99,6 @@ export default {
       isModalActive: false,
       model: new Model({
         filepaths: MODEL_FILEPATHS,
-        filesystem: true,
       }),
       modelLoading: true,
       modelRunning: false,
