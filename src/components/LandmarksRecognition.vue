@@ -31,7 +31,7 @@
       <div class="card">
         <div class="card-image">
           <figure class="image has-text-centered">
-            <canvas id="input-canvas" width="224" height="224"></canvas>
+            <canvas id="input-canvas" width="150" height="150"></canvas>
           </figure>
         </div>
         <div class="card-content">
@@ -58,9 +58,13 @@ import ndarray from 'ndarray';
 import ops from 'ndarray-ops';
 import classes from './classes';
 
-const MODEL_FILE = require('../../data/landmarks_recognition/basic_cnn.json');
-const WEIGHTS_FILE = require('../../data/landmarks_recognition/basic_cnn_weights.buf');
-const METADATA_FILE = require('../../data/landmarks_recognition/basic_cnn_metadata.json');
+// const MODEL_FILE = require('../../data/landmarks_recognition/basic_cnn.json');
+// const WEIGHTS_FILE = require('../../data/landmarks_recognition/basic_cnn_weights.buf');
+// const METADATA_FILE = require('../../data/landmarks_recognition/basic_cnn_metadata.json');
+
+const MODEL_FILE = require('../../data/landmarks_recognition/finetuning.json');
+const WEIGHTS_FILE = require('../../data/landmarks_recognition/finetuning_weights.buf');
+const METADATA_FILE = require('../../data/landmarks_recognition/finetuning_metadata.json');
 
 const MODEL_FILEPATHS = {
   model: MODEL_FILE,
@@ -130,7 +134,7 @@ export default {
             });
           }
         },
-        { maxWidth: 224, maxHeight: 224, cover: true, crop: true, canvas: true, crossOrigin: 'Anonymous' },
+        { maxWidth: 150, maxHeight: 150, cover: true, crop: true, canvas: true, crossOrigin: 'Anonymous' },
       );
     },
     onInput(files) {
@@ -164,8 +168,11 @@ export default {
       ops.assign(dataProcessedTensor.pick(null, null, 1), dataTensor.pick(null, null, 1));
       ops.assign(dataProcessedTensor.pick(null, null, 2), dataTensor.pick(null, null, 2));
 
-      this.model.predict({ input: dataProcessedTensor.data }).then((outputData) => {
-        this.output = outputData.output;
+      const inputData = { input_1: dataProcessedTensor.data };
+
+      this.model.predict(inputData).then((outputData) => {
+        debugger;
+        this.output = outputData.dense_2;
         this.modelRunning = false;
       });
     },

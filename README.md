@@ -1,5 +1,8 @@
 <div align="center">
   <p>
+  <img src="http://i.imgur.com/bt4hcc5.png" width="250" />
+  </p>
+  <p>
     <a href="">
       <img alt="First release" src="https://img.shields.io/badge/release-v1.0-brightgreen.svg" />
     </a>
