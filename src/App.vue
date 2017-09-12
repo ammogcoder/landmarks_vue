@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <landmarks-recognition></landmarks-recognition>
-    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 

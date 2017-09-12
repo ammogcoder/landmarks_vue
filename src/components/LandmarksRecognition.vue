@@ -3,10 +3,10 @@
     <header class="container">
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="#">
+          <div class="navbar-item">
             <img class="app-logo" src="static/img/icons/icon-128x128.png">
             <p class="app-logo-name">LandmarksVue</p>
-          </a>
+          </div>
         </div>
         <div class="navbar-menu">
           <div class="navbar-end">
@@ -24,11 +24,29 @@
           <b>LandmarksVue</b> is a project using
           <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue.js</a>
           and
-          <a href="https://github.com/transcranial/keras-js" target="_blank" rel="noopener">Keras.js</a> using a VGG16 convolutional neural network trained on ImageNet and fine-tuned on a landmarks dataset.
+          <a href="https://github.com/transcranial/keras-js" target="_blank" rel="noopener">Keras.js</a> using a VGG16 convolutional neural network trained on ImageNet and fine-tuned on a landmark images dataset.
+
+          <br>
+          <br> Source code available
+          <a href="https://github.com/vfaramond/landmarks_vue" target="_blank" rel="noopener">here</a>!
+          <br>
+          <br>
+          <p>Victor Faramond | {{(new Date()).getFullYear()}}</p>
+          <div class="block">
+            <a href="https://github.com/vfaramond" target="_blank" rel="noopener">
+              <b-icon icon="github" />
+            </a>
+            <a href="https://twitter.com/vfaramond" target="_blank" rel="noopener">
+              <b-icon icon="twitter" />
+            </a>
+            <a href="https://www.linkedin.com/in/victorfaramond" target="_blank" rel="noopener">
+              <b-icon icon="linkedin" />
+            </a>
+            <a href="mailto:victor.faramond@gmail.com" target="_blank" rel="noopener">
+              <b-icon icon="envelope" />
+            </a>
+          </div>
         </section>
-        <footer class="modal-card-foot has-text-centered">
-          <p>Victor Faramond | 2017</p>
-        </footer>
       </div>
     </b-modal>
     <br><br>
@@ -38,7 +56,7 @@
           <section class="section">
             <div class="content has-text-centered">
               <p>
-                <b-icon icon="file_upload" size="is-large">
+                <b-icon icon="upload" size="is-large">
                 </b-icon>
               </p>
               <p>Drop an image file here or click to upload</p>
@@ -46,6 +64,12 @@
           </section>
         </b-upload>
       </b-field>
+      <div v-if="modelLoading">
+        <p>Model is loading...</p>
+        <br>
+        <progress class="progress" :value="loadingProgress" max="100"></progress>
+        <p>{{ loadingProgress }}%</p>
+      </div>
     </section>
     <br><br>
     <section class="container has-text-centered">
@@ -145,12 +169,6 @@ export default {
     } else {
       this.hasWebgl = false;
     }
-
-    this.$Progress.start();
-
-    this.loadingProgressInterval = setInterval(() => {
-      this.$Progress.set(this.loadingProgress);
-    }, 1000);
   },
 
   data() {
@@ -257,6 +275,10 @@ export default {
 <style scoped lang="scss">
 $small: 590px;
 
+.container {
+  padding: 0 1.5em;
+}
+
 .navbar {
   background-color: transparent;
 
@@ -269,14 +291,14 @@ $small: 590px;
   }
 
   .app-logo {
-    max-height: 35px;
-    padding-right: 5px;
+    max-height: 2.5em;
+    padding-right: .5em;
   }
 
   .app-logo-name {
-    font-size: 18px;
-    letter-spacing: 1px;
-    padding-top: 2px;
+    font-size: 1.2em;
+    letter-spacing: .05em;
+    padding-top: .3em;
 
     @media screen and (max-width: $small) {
       display: none;
@@ -294,19 +316,10 @@ $small: 590px;
 .card {
   background-color: transparent;
   margin: auto;
-  max-width: 600px;
-}
+  max-width: 40em;
 
-.card-image {
-  padding-top: 10px;
-}
-
-.output {
-  display: flex;
-  align-items: center;
-
-  .output-label {
-    width: 250px;
+  .card-image {
+    padding-top: 1em;
   }
 }
 </style>
