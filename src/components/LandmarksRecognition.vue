@@ -1,16 +1,37 @@
 <template>
   <div>
-    <section class="hero is-primary">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title">
-            Landmarks recognition
-          </h1>
+    <header class="container">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="http://bulma.io">
+            <img class="app-logo" src="/static/img/icons/icon-128x128.png" alt="Bulma: a modern CSS framework based on Flexbox">
+            <p class="app-logo-name">Landmarks Recognition</p>
+          </a>
         </div>
-      </div>
-    </section>
-    <br>
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item button" @click="isModalActive = true">
+              What's this ?
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
     <b-loading :active.sync="modelLoading"></b-loading>
+    <b-modal :active.sync="isModalActive" canCancel>
+      <div class="modal-card">
+        <section class="modal-card-body has-text-centered">
+          <b>Landmarks Recognition</b> is a little project using
+          <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue.js</a>
+          and
+          <a href="https://github.com/transcranial/keras-js" target="_blank" rel="noopener">Keras.js</a> using a VGG16 convolutional neural network trained on ImageNet and fine-tuned on a landmarks dataset.
+        </section>
+        <footer class="modal-card-foot has-text-centered">
+          <p>Victor Faramond | 2017</p>
+        </footer>
+      </div>
+    </b-modal>
+    <br><br>
     <section class="container has-text-centered">
       <b-field>
         <b-upload v-model="dropFiles" drag-drop v-on:input="onInput">
@@ -26,9 +47,9 @@
         </b-upload>
       </b-field>
     </section>
-    <br>
+    <br><br>
     <section class="container has-text-centered">
-      <div class="card">
+      <div class="card" v-show="modelRunning || output">
         <div class="card-image">
           <figure class="image has-text-centered">
             <canvas id="input-canvas" width="150" height="150"></canvas>
@@ -36,12 +57,13 @@
         </div>
         <div class="card-content">
           <div class="loader model-loader" v-if="modelRunning"></div>
-          <ul v-else>
-            <li v-for="i in [0, 1, 2, 3, 4]" :key="i" class="output" :class="{ predicted: i === 0 && outputClasses[i].probability.toFixed(2) > 0 }">
-              <div class="output-label">{{ outputClasses[i].name }}</div>
-              <progress class="progress" :class="progressClass(outputClasses[i].probability)" :value="Math.round(100 * outputClasses[i].probability)" max="100"></progress>
-            </li>
-          </ul>
+          <div v-else-if="outputClass">
+            <h3 class="is-size-2">{{ outputClass }}</h3>
+            <p>{{ outputClassDescription.body }}</p>
+            <p>
+              <a target="_blank" rel="noopener" :href="outputClassDescription.url">Learn more</a>
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -50,17 +72,12 @@
 
 <script>
 import { Model } from 'keras-js';
-import reverse from 'lodash/reverse';
 import sortBy from 'lodash/sortBy';
-import take from 'lodash/take';
 import loadImage from 'blueimp-load-image';
 import ndarray from 'ndarray';
 import ops from 'ndarray-ops';
+import axios from 'axios';
 import classes from './classes';
-
-// const MODEL_FILE = require('../../data/landmarks_recognition/basic_cnn.json');
-// const WEIGHTS_FILE = require('../../data/landmarks_recognition/basic_cnn_weights.buf');
-// const METADATA_FILE = require('../../data/landmarks_recognition/basic_cnn_metadata.json');
 
 const MODEL_FILE = require('../../data/landmarks_recognition/finetuning.json');
 const WEIGHTS_FILE = require('../../data/landmarks_recognition/finetuning_weights.buf');
@@ -75,9 +92,11 @@ const MODEL_FILEPATHS = {
 export default {
   data() {
     return {
+      classes,
       dropFiles: [],
       imageLoading: false,
       imageLoadingError: false,
+      isModalActive: false,
       model: new Model({
         filepaths: MODEL_FILEPATHS,
         filesystem: true,
@@ -85,21 +104,49 @@ export default {
       modelLoading: true,
       modelRunning: false,
       output: null,
-      classes,
     };
   },
 
-  computed: {
-    outputClasses() {
-      if (!this.output) {
-        const empty = [];
-        for (let i = 0; i < 5; i += 1) {
-          empty.push({ name: '-', probability: 0 });
-        }
-        return empty;
+  asyncComputed: {
+    outputClassDescription() {
+      if (!this.outputClass) {
+        return {
+          body: '',
+          url: '',
+        };
       }
 
-      return this.topClasses(this.output, 5);
+      return axios.get('https://kgsearch.googleapis.com/v1/entities:search', {
+        params: {
+          query: this.outputClass.split(' ').join('+'),
+          key: 'AIzaSyCwy-tOOGMLxR9AAMBsxN9PypMQB2drxkU',
+          limit: 1,
+        },
+      })
+        .then((response) => {
+          const description = response.data.itemListElement[0].result.detailedDescription;
+
+          return {
+            body: description.articleBody,
+            url: description.url,
+          };
+        });
+    },
+  },
+
+  computed: {
+    outputClass() {
+      if (!this.output) {
+        return null;
+      }
+
+      const probs = Array.prototype.slice.call(this.output);
+
+      const maxProbability = sortBy(
+        probs.map((prob, index) => [prob, index]), probIndex => probIndex[0],
+      );
+
+      return this.classes[maxProbability[maxProbability.length - 1][1]];
     },
   },
 
@@ -171,32 +218,44 @@ export default {
       const inputData = { input_1: dataProcessedTensor.data };
 
       this.model.predict(inputData).then((outputData) => {
-        debugger;
         this.output = outputData.dense_2;
         this.modelRunning = false;
       });
-    },
-    topClasses(classProbabilities, k) {
-      const probs = Array.prototype.slice.call(classProbabilities);
-
-      const sorted = reverse(
-        sortBy(
-          probs.map((prob, index) => [prob, index]), probIndex => probIndex[0],
-        ),
-      );
-
-      const topK = take(sorted, k).map(probIndex => ({
-        name: this.classes[probIndex[1]],
-        probability: probIndex[0],
-      }));
-
-      return topK;
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
+$small: 590px;
+
+.navbar {
+  background-color: transparent;
+
+  a.navbar-item:hover {
+    background-color: transparent;
+  }
+
+  .navbar-item.button {
+    margin: auto;
+  }
+
+  .app-logo {
+    max-height: 35px;
+    padding-right: 5px;
+  }
+
+  .app-logo-name {
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding-top: 2px;
+
+    @media screen and (max-width: $small) {
+      display: none;
+    }
+  }
+}
+
 .model-loader {
   display: block;
   height: 3em;
@@ -205,7 +264,9 @@ export default {
 }
 
 .card {
-  margin: 0 20px;
+  background-color: transparent;
+  margin: auto;
+  max-width: 600px;
 }
 
 .card-image {

@@ -26,6 +26,7 @@
         if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
     <% }}} %>
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400" rel="stylesheet">
       <link rel="stylesheet " href="//fonts.googleapis.com/icon?family=Material+Icons ">
 </head>
 
