@@ -18,7 +18,7 @@
   <p>🏛 <i>Arc de Triomphe</i>, <i>Big Ben</i>, <i>Casa Loma</i>, <i>Castel Santangelo</i>, <i>Charlottenburg Palace</i>, <i>Colosseum</i>, <i>Dresden Frauenkirche</i>, <i>Eiffel Tower</i>, <i>Independence Hall</i>, <i>Leaning Tower of Pisa</i>, <i>Milan Cathedral</i>, <i>Notre Dame Cathedral</i>, <i>Pantheon</i>, <i>Reichstag</i>, <i>Sacre Coeur Basilica</i>, <i>Savior on Blood Church</i>, <i>St Basil Cathedral</i>, <i>St Louis Cathedral</i>, <i>St Paul Cathedral</i>, <i>Statue of Liberty</i>, <i>Stephansdom</i>, <i>Taj Mahal</i>, <i>Trevi Foutain</i>, <i>Tyn Church</i> and <i>Westminster Abbey</i> 🏛</p>
 
   <p>
-    <a href="https://vfaramond.github.io/landmarks_vue/">
+    <a href="https://landmarksvue.netlify.com/">
       Launch App
     </a>
   </p>
@@ -33,7 +33,7 @@
 
 * 📱 <strong>Responsive: </strong> Made mobile responsive with [Buefy](https://buefy.github.io) and [SASS](http://sass-lang.com/)
 
-* 🎉 <strong>Live: </strong> Deployed and secured with [GitHub Pages](https://pages.github.com/)
+* 🎉 <strong>Live: </strong> Deployed and secured with [Netlify](https://landmarksvue.netlify.com/)
 
 More insight on the classifier training in [this repository](https://github.com/vfaramond/landmarks-recognition).
 
