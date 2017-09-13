@@ -51,9 +51,9 @@ import ndarray from 'ndarray';
 import ops from 'ndarray-ops';
 import axios from 'axios';
 
-const MODEL_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks-webapp/d3db8742/data/landmarks_recognition/finetuning.json';
-const WEIGHTS_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks-webapp/d3db8742/data/landmarks_recognition/finetuning_weights.buf';
-const METADATA_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks-webapp/d3db8742/data/landmarks_recognition/finetuning_metadata.json';
+const MODEL_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks_vue/cf846b46/data/model.json';
+const WEIGHTS_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks_vue/cf846b46/data/model_weights.buf';
+const METADATA_FILE = 'https://cdn.rawgit.com/vfaramond/landmarks_vue/cf846b46/data/model_metadata.json';
 
 const MODEL_FILEPATHS = {
   model: MODEL_FILE,
