@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <landmarks-recognition></landmarks-recognition>
+    <hero-header />
+    <hero-body />
   </div>
 </template>
 
 <script>
-import LandmarksRecognition from '@/components/LandmarksRecognition';
+import HeroBody from '@/components/HeroBody';
+import HeroHeader from '@/components/HeroHeader';
 
 export default {
   name: 'app',
   components: {
-    LandmarksRecognition,
+    HeroBody,
+    HeroHeader,
   },
 };
 </script>
